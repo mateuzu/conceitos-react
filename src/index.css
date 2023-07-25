@@ -1,69 +1,13 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+/*
+    Tailwind CSS é uma biblioteca de estilos utilitários que pode ser usada em conjunto com React para estilizar rapidamente os componentes sem escrever CSS personalizado.
+    Em vez de fornecer estilos pré-construídos, como muitas outras bibliotecas de estilização, o Tailwind CSS fornece classes utilitárias que podem ser usadas para definir estilos diretamente em seus elementos HTML ou em seus componentes React.
+    Basicamente, Tailwind fornece um conjunto de classes utilitárias com configurações pré-definidas (por exemplo, uma classe Tailwind que fornece uma margin-left de 10px) para estilizar um componente
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
+    SINTAXE:
+    Para utilização no VS code deve utilizar classes para estilizar um elemento, como no Tailwind essas classes são pré definidas basta informar ao elemento a classe que deseja utilizar, como por ex:
+    div className="m-2" = nesse caso, a classe m-2 define que a div será estilizada com margin de 8 px (8px pois o tailwind utiliza a unidade de medida rem, dessa forma, 4px em CSS representa 1rem em Tailwind)
+*/
