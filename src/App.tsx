@@ -1,79 +1,54 @@
-import './App.css';
-import { useState, useEffect } from 'react';
-import axios from 'axios'; //importando biblioteca AXIOS
+import UserProvider from './contexts/UserContext';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Home from './paginas/home/Home';
+import Login from './paginas/login/Login';
 
-interface User {
-  id: number;
-  name: string;
-}
 
 function App() {
-  const [users, setUsers] = useState<User[]>([]);
-
-  useEffect(() => {
-    axios.get<User[]>('https://jsonplaceholder.typicode.com/users') //utilizando o método axios.get para realizar uma requisição GET para a URL informada
-      .then(response => { //then = Função que será executada caso a requisição seja bem sucedidade, ou seja, quando a API retornar uma resposta
-        setUsers(response.data); //setando o useState com as respostas da requisição
-      })
-      .catch(error => { //caso ocorra algum erro, será capturado pelo catch
-        console.log(error);
-      });
-  }, []);
-
   return (
-    <div>
-      <h1>Lista de usuários</h1>
-      <ul>
-        {users.map(user => (
-          <li key={user.id}>{user.name}</li>
-        ))}
-      </ul>
-    </div>
+    <UserProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/home" element={<Home />} />
+        </Routes>
+
+      </BrowserRouter>
+
+    </UserProvider>
   );
 }
 
 export default App;
 
 /*
-  Bibliotecas de comunicação HTTP em React são bibliotecas que permitem que a aplicação React faça requisições HTTP para uma API e receba respostas.
-  Essas bibliotecas são responsáveis por lidar com a comunicação entre o frontend e o backend da aplicação, permitindo que o usuário veja e interaja com os dados que são armazenados no servidor.
-  As bibliotecas de comunicação HTTP mais comuns em React são o Axios, Fetch e jQuery. Cada uma dessas bibliotecas tem suas próprias vantagens e desvantagens e, em geral, são utilizadas para realizar operações de CRUD (Create, Read, Update, Delete) em um backend.
+  Este é um exemplo de um componente React chamado App que é o componente raiz do aplicativo.
+  Ele usa o React Router DOM para criar rotas para diferentes páginas em nosso aplicativo, e também usa um contexto chamado UserContext, que foi definido em outro lugar do aplicativo.
 
-  Essas bibliotecas normalmente utilizam o conceito de Promises ou Callbacks para realizar as requisições HTTP de forma assíncrona e lidar com a resposta.
-  Isso significa que a requisição é feita em segundo plano, enquanto a aplicação continua a funcionar normalmente, e quando a resposta é recebida, a biblioteca chama uma função de retorno para lidar com os dados.
+  IMPORT *
+  O componente começa com a importação de algumas dependências, incluindo React, UserProvider, BrowserRouter, Route e Routes.
 
-  AXIOS EM REACT:
-  Axios é uma biblioteca JavaScript utilizada para realizar requisições HTTP, tanto para recuperar dados quanto para enviar dados para uma API.
-  É comumente utilizada em aplicações React para realizar operações de CRUD (Create, Read, Update, Delete) em um backend.
-  A vantagem do Axios é que ele é fácil de usar e fornece uma série de recursos úteis para lidar com requisições HTTP, como o suporte a Promises, intercepção de requisições e respostas, cancelamento de requisições, entre outros.
+  FUNCTION App *
+  Em seguida, a função App é definida, que retorna o HTML a ser renderizado no navegador.
 
+  USER PROVIDER *
+  Dentro da função App, o componente UserProvider é renderizado e envolve todo o conteúdo do aplicativo.
+  Isso permite que outros componentes acessem o contexto definido pelo UserProvider.
 
-  SERVICE EM REACT:
-  Em React, um "service" é um módulo ou uma classe que encapsula uma funcionalidade específica da aplicação, como o acesso a uma API, a manipulação de dados, a autenticação de usuários, entre outros.
-  Esses serviços geralmente contêm métodos que realizam operações assíncronas, como a realização de requisições HTTP, e retornam Promises com os resultados dessas operações.
+  BROWSER ROUTER *
+  Em seguida, o componente BrowserRouter é renderizado, que fornece a funcionalidade de roteamento para o aplicativo.
+  Dentro do BrowserRouter, o componente Routes é definido, que define as rotas para diferentes páginas.
 
-  Um dos principais objetivos de utilizar serviços em React é separar as responsabilidades da aplicação, tornando o código mais organizado e fácil de manter.
-  Além disso, o uso de serviços também permite reutilizar a lógica de negócio em diferentes partes da aplicação, sem precisar duplicar código.
+  ROUTES *
+  Existem três rotas definidas no exemplo, cada uma com um elemento de página associado.
+  A primeira rota é a raiz do aplicativo ("/"), que redireciona o usuário para a página de login. - <Route path="/" element={<Login />} />
+  A segunda rota é a página de login ("/login"), que renderiza o componente Login. - <Route path="/login" element={<Login />} />
+  A terceira rota é a página Home ("/home"), que renderiza o componente Home. - <Route path="/home" element={<Home />} />
 
-  O serviço com Axios em React é uma forma de fazer requisições HTTP de forma assíncrona em aplicações web.
-  Essas requisições são importantes para obter dados de APIs externas, enviar dados para o servidor, ou até mesmo para realizar atualizações em tempo real na interface do usuário.
+  EXPORT defalut App *
+  Por fim, o componente App é exportado para que possa ser usado em outros arquivos do aplicativo.
 
-  
-  CONTEXT API:
-  Quando um componente depende do estado de outro componente, é necessário passar esse estado através de propriedades (props) de pai para filho. Isso pode levar a uma cadeia longa de propriedades que precisam ser passadas, conhecida como "prop drilling".
-  Além disso, se um componente precisar atualizar o estado que é compartilhado com outros componentes, ele precisará passar essa atualização através de seus componentes pai, tornando o código mais complexo e difícil de manter.
-
-  Uma solução é o uso do Context API do React, que permite compartilhar o estado em uma árvore de componentes sem a necessidade de passar propriedades manualmente.
-
-  O Context API é uma ferramenta da biblioteca React do JavaScript que permite o armazenamento de dados em uma "árvore" de objetos que podem ser acessados de forma global dentro de um aplicativo.
-  Essa árvore é conhecida como "contexto" e pode ser usada para compartilhar informações entre diferentes componentes da interface do usuário sem precisar passar as informações manualmente entre os componentes.
-
-  O Context API é útil para situações em que vários componentes precisam compartilhar informações em comum, como por exemplo, informações de autenticação do usuário, tema da aplicação, preferências do usuário, etc.
-  Em vez de passar essas informações para cada componente manualmente, o Context API permite armazená-las em um local centralizado e acessá-las em qualquer lugar da aplicação.
-
-  Para utilizar o Context API, é necessário criar um contexto com a função createContext(), que retorna um objeto contendo um Provider e um Consumer.
-  O Provider é responsável por fornecer o contexto para os componentes filhos, enquanto o Consumer é responsável por acessar o contexto dentro de um componente.
-
-  O Provider recebe um valor como propriedade, que é o objeto que será compartilhado entre os componentes filhos.
-  O Consumer é usado dentro de um componente para acessar o valor do contexto.
+  Em resumo modifique o componente de App.tsx para receber o UserContext sobre toda a aplicação pra isso construa uma tag de UserProvider que emcobre toda a aplicação
+  Em seguida construa um sistema de rotas para home e login, todos os componentes que tiverem dentro de UserProvider consiguirão acessar e modificar a informação de nome do ContextAPI.
 */
