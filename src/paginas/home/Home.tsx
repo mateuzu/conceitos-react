@@ -1,49 +1,42 @@
-import homeLogo from '../../assets/home.png'
-import './Home.css';
+import React, { useContext } from 'react';
+
+import { UserContext } from '../../contexts/UserContext';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Home() {
+    const { nome, setNome } = useContext(UserContext);
+
     return (
-        <>
-            <div className="bg-indigo-900 flex justify-center">
-                <div className='container grid grid-cols-2 text-white'>
-                    <div className="flex flex-col gap-4 items-center justify-center py-4">
-                        <h2 className='text-5xl font-bold'>Seja bem vinde!</h2>
-                        <p className='text-xl'>Expresse aqui seus pensamentos e opniões</p>
-
-                        <div className="flex justify-around gap-4">
-
-                            <button className='rounded bg-white text-blue-800 py-2 px-4'>Ver postagens</button>
-                        </div>
-                    </div>
-
-                    <div className="flex justify-center ">
-                        <img src={homeLogo} alt="" className='w-2/3' />
-                    </div>
-                </div>
+        <div className='flex justify-center items-center'>
+            <div>
+                <h2 className="text-slate-900 text-5xl  my-4">Logar</h2>
+                <h2 className="text-slate-900 text-4xl ">Ola user : {nome}</h2>
+                <Link to="/login" className="my-4 rounded bg-indigo-400 hover:bg-indigo-900 text-white w-1/2 py-2 flex justify-center">
+                    Voltar
+                </Link>
             </div>
-
-        </>
+        </div>
     );
 }
 
 export default Home;
 
 /*
-    Bibliotecas de roteamento em desenvolvimento front-end
-    Bibliotecas de roteamento em desenvolvimento front-end são conjuntos de ferramentas e funções que permitem que um aplicativo de front-end gerencie as rotas do navegador de forma eficiente e confiável.
-    Essas bibliotecas geralmente são usadas em aplicativos de página única (SPA), que usam JavaScript para renderizar o conteúdo no navegador.
-    Basicamente, é uma forma de gerenciar quais páginas serão exibidas ao usuário
+    Este é um exemplo de um componente React chamado Home que usa o hook useContext para acessar o contexto UserContext que foi definido em outro lugar do aplicativo.
+    Além disso, o componente usa a API Link do React Router DOM para criar um link para a página de login.
 
-    REACT ROUTER DOM
-    React Router DOM é uma biblioteca de roteamento para aplicativos React.
-    Ele permite que você gerencie a navegação de uma página para outra sem atualizar a página inteira. A versão mais recente do React Router DOM é a versão 6.
+    IMPORTS *
+    O componente começa com a importação de algumas dependências, incluindo React, useContext, UserContext, Link e useNavigate.
 
-    OBS:
-    Como o React utiliza o conceito de SPA, ou seja, o conteúdo é renderizado dinamicamente, NÃO é recomendado utilizar a TAG <a> para realizar a navegação entre páginas, pois ao utilizar essa TAG, todo o conteúdo é renderizado novamente
+    FUNCTION Home *
+    Em seguida, a função Home é definida, que retorna o HTML a ser renderizado no navegador.
+    Dentro da função Home, a constante { nome, setNome } é declarada e usa o hook useContext para acessar o objeto do contexto UserContext.
+    O valor de "nome" é obtido do contexto para exibir uma mensagem personalizada para o usuário.
 
-    Para navegar de uma página para outra em React sem que todo o conteúdo seja renderizado novamente, utilize a TAG <Link to = 'caminho'> Exemplo </Link>
-    Com a TAG <Link>, somente o conteúdo adicional/diferente será renderizado em tela, ao invés do conteúdo inteiro
-    
-    No exemplo:
-    <Link to='/login' className='hover:underline mx-4'>Login por Link</Link> - Uma forma de navegar entre páginas utilizando padrão SPA para que somente o contéudo adicional seja renderizado
+    RETURN *
+    Em seguida, o HTML é renderizado no navegador, começando com uma div que tem um título "Logar" e uma mensagem personalizada de boas-vindas para o usuário.
+    Finalmente, o componente renderiza um Link para a página de login com o texto "Voltar".
+    Quando o usuário clica no link, ele é redirecionado para a página de login, onde pode entrar com um nome de usuário.
+
+    Em resumo o componente home apresenta a informação de nome do UserContext e apresenta um botão de voltar que retorna a aplicação para a pagina login
 */
