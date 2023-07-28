@@ -1,25 +1,36 @@
-import UserProvider from './contexts/UserContext';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './paginas/home/Home';
 import Login from './paginas/login/Login';
+import Navbar from './components/navBar/NavBar';
+import Footer from './components/footer/Footer';
+import Cadastro from './paginas/cadastro/Cadastro';
+import { AuthProvider } from './contexts/AuthContext';
 
 
 function App() {
   return (
-    <UserProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/home" element={<Home />} />
-        </Routes>
+    <>
 
-      </BrowserRouter>
-
-    </UserProvider>
+    <AuthProvider> 
+        <BrowserRouter>
+          <Navbar />
+          <div className='min-h-[80vh]'>
+            <Routes>
+              <Route path="/" element={<Cadastro />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/cadastro" element={<Cadastro />} />
+              <Route path="/home" element={<Home />} />
+            </Routes>
+          </div>
+          <Footer />
+        </BrowserRouter>
+    </AuthProvider>
+    </>
   );
+  /*
+    AuthProvider = Provê as informações (contexto) para os demais componentes filhos
+  */
 }
-
 export default App;
 
 /*
