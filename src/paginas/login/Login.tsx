@@ -11,7 +11,7 @@ function Login() {
     let navigate = useNavigate(); //useNavigate = Redireciona o usuário de uma página para outra sem recarregar a página, neste caso, foi atribuída à uma variavel
 
     //constante de estado para guardar as informações de login definidas na model UsuarioLogin (id, nome, email e etc)
-    const [usuarioLogin, setUsuarioLogin] = useState<UsuarioLogin>( //useState = guarda a informação de estado do Usuario logado e envia para o backend para tentar realizar o login
+    const [usuarioLogin, setUsuarioLogin] = useState<UsuarioLogin>( //useState = guarda a informação de estado do Usuario logado e envia para o backend para tentar realizar o login. Dessa forma o React pode verificar o estado dessa variavel a fim de verificar se houve alterações
         {} as UsuarioLogin //{} as UsuarioLogin = atalho do React que indica que o objeto está vazio, porém dentro dele possui todas as propriedades definidas no objeto UsuarioLogin (id, nome, e-mail e etc)
     );
 
