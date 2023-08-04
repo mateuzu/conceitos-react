@@ -8,11 +8,14 @@ import { AuthProvider } from './contexts/AuthContext';
 import ListaTemas from './components/temas/listaTemas/ListaTemas';
 import FormularioTema from './components/temas/formularioTema/FormularioTema';
 import DeletarTema from './components/temas/deletarTema/DeletarTema';
+import ListaPostagens from './components/postagens/listaPostagens/ListaPostagens';
+import FormularioPostagem from './components/postagens/formularioPostagem/FormularioPostagem';
+import DeletarPostagem from './components/postagens/deletarPostagem/DeletarPostagem';
 
 function App() {
   return (
     <>
-    <AuthProvider>
+      <AuthProvider>
         <BrowserRouter>
           <Navbar />
           <div className='min-h-[80vh]'>
@@ -22,23 +25,27 @@ function App() {
               <Route path="/cadastro" element={<Cadastro />} />
               <Route path="/home" element={<Home />} />
               <Route path="/temas" element={<ListaTemas />} />
-              <Route path="/cadastroTema" element={<FormularioTema />} /> 
+              <Route path="/cadastroTema" element={<FormularioTema />} />
               <Route path="/editarTema/:id" element={<FormularioTema />} />
               <Route path="/deletarTema/:id" element={<DeletarTema />} />
+              <Route path="/postagens" element={<ListaPostagens />} />
+              <Route path="/cadastroPostagem" element={<FormularioPostagem />} />
+              <Route path="/editarPostagem/:id" element={<FormularioPostagem />} /> {/* Parametro id informado na URL para editar uma postagem específica*/}
+              <Route path="/deletarPostagem/:id" element={<DeletarPostagem />} /> {/* Parametro id informado na URL para deletar uma postagem específica*/}
             </Routes>
           </div>
           <Footer />
         </BrowserRouter>
-        </AuthProvider>
+      </AuthProvider>
     </>
   );
 }
 export default App;
 
 /*
-  OBS: Repare que ambas as rotas irão renderizar o mesmo elemento 'FormularioTema'. Isso acontece pois o formulário de edição da ppstagem será o mesmo formulário de cadastro
-  <Route path="/cadastroTema" element={<FormularioTema />} /> 
-  <Route path="/editarTema/:id" element={<FormularioTema />} /> -- Parametro 'id' sendo passado na URL (semelhante ao Insomnia).
-  Ao declarar /editarTema/:id o React considera o que está após : como uma variavel
+  ROTAS DE REQUISIÇÃO: São as rotas especificadas no backend para executar algum método, como:usuarios/logar.
+  São utilizadas para enviar requisições do Front para o Back (Rota utilizada no arquivo Service)
 
+  ROTAS DE NAVEGAÇÃO: São as rotas utilizadas para navegação entre páginas durante o uso da aplicação.
+  Ao acessar um componente específico, essa rota é exibida no campo URL (Rota utilizada no arquivo App)
 */

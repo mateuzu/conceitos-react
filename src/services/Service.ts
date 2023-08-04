@@ -48,4 +48,10 @@ export const deletar = async (url: string, header: Object) => {
 
     async = A função assíncrona permite lidar de forma mais conveniente com operações assíncronas, como fazer requisições a servidores, ler arquivos, acessar bancos de dados, entre outras tarefas que não são executadas de forma sequencial.
     Basicamente indica que a função pode levar algum tempo para ser concluída
+
+    ROTAS DE REQUISIÇÃO: São as rotas especificadas no backend para executar algum método, como:usuarios/logar.
+    São utilizadas para enviar requisições do Front para o Back (Rota utilizada no arquivo Service)
+
+    ROTAS DE NAVEGAÇÃO: São as rotas utilizadas para navegação entre páginas durante o uso da aplicação.
+    Ao acessar um componente específico, essa rota é exibida no campo URL (Rota utilizada no arquivo App)
 */
